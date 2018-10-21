@@ -11,9 +11,13 @@
  '(custom-enabled-themes (quote (manoj-dark)))
  '(org-capture-templates
    (quote
-    (("s" "Story (normal development)" entry
+    (("p" "Production support" entry
+      (id "prod-support")
+      (file "~/.emacs.d/org/templates/task.org")
+      :prepend t)
+     ("s" "Story (normal development)" entry
       (id "stories")
-      (file "~/.emacs.d/org/templates/story.org")
+      (file "~/.emacs.d/org/templates/task.org")
       :prepend t :jump-to-captured t))))
  '(package-selected-packages (quote (org))))
 (custom-set-faces

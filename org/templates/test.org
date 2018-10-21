@@ -1,0 +1,48 @@
+#+PROPERTY: Type_ALL: Normal "Production support" "Integrator work" "Common fines production bugs" "Hanke fines production bugs" "CCM production bugs" "Training" "Sprint actions"
+#+TODO: UNPLANNED(u) TODO(t) IN_PROGRESS(p) | DONE(d@)
+
+* Stories
+  :PROPERTIES:
+  :Type:     Normal
+  :ID:       stories
+  :END:
+* Production support
+  :PROPERTIES:
+  :Type:     Production support
+  :ID:       prod-support
+  :END:
+* RAT work
+  :PROPERTIES:
+  :Type:     Integrator work
+  :ID:       rat-work
+  :END:
+* Production bugs (Fines/Common)
+  :PROPERTIES:
+  :Type:     Common fines production bugs
+  :ID:       prod-bugs-fines-common
+  :END:
+* Production bugs (Fines/Hanke)
+  :PROPERTIES:
+  :Type:     Hanke fines production bugs
+  :ID:       prod-bugs-fines-program
+  :END:
+* Prodcution bugs (CCM)
+  :PROPERTIES:
+  :Type:     CCM production bugs
+  :ID:       prod-bugs-ccm
+  :END:
+* Training
+  :PROPERTIES:
+  :Type:     Training
+  :ID:       training
+  :END:
+* Sprint actions
+  :PROPERTIES:
+  :Type:     Sprint actions
+  :ID:       sprint-actions
+  :END:
+** Daily scrum
+** Backlog refinement
+** Sprint planning
+** Sprint review and retrospective
+** IP planning
