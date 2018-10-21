@@ -1,0 +1,11 @@
+* TODO %^{Jira ticket id} %^{Title}
+  :PROPERTIES:
+  :CREATED: %T
+  :END:
+  %^{Description}
+  %?
+** TODO Planning
+** TODO Development
+** UNPLANNED Documentation
+** UNPLANNED Testing
+** UNPLANNED Regression testing

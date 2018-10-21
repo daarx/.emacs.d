@@ -9,6 +9,12 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(custom-enabled-themes (quote (manoj-dark)))
+ '(org-capture-templates
+   (quote
+    (("s" "Story (normal development)" entry
+      (id "stories")
+      (file "~/.emacs.d/org/templates/story.org")
+      :prepend t :jump-to-captured t))))
  '(package-selected-packages (quote (org))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -24,6 +30,10 @@
       ketp-old-versions 2
       version-control t)
 
+(setq-default indent-tabs-mode nil)
+(setq-default tab-width 4)
+(setq tab-stop-list (number-sequence 4 120 4))
+
 (setq inhibit-startup-message t)
 (setq-default buffer-file-coding-system 'utf-8-unix)
 (set-terminal-coding-system 'utf-8)
@@ -35,11 +45,17 @@
 (set-terminal-coding-system 'utf-8)
 
 (if (equal system-type 'windows-nt)
-    (progn (setq explicit-shell-file "C:/Users/henrik.karlsson/AppData/Local/Programs/Git/bin/sh.exe")
-	   (setq shell-file-name "bash")
-	   (setq explicit-sh.exe-args '("--login" "-i"))
-	   (setenv "SHELL" shell-file-name)
-	   (add-hook 'comint-output-filter-functions 'comint-strip-ctrl-m)))
+    (progn (setenv "PATH" 
+                   (concat "C:/msys64/usr/bin;"
+                           "C:/msys64/mingw64/bin;"
+                           "C:/msys64/usr/local/bin;"
+                           "C:/Windows/System32;"
+                           "C:/Windows"))
+           (setq shell-file-name "C:\\msys64\\usr\\bin\\zsh.exe")
+           (setq explicit-shell-file shell-file-name)
+           (setq explicit-zsh.exe-args '("--login" "-i"))
+           (setenv "SHELL" shell-file-name)
+           (add-hook 'comint-output-filter-functions 'comint-strip-ctrl-m)))
 
 ;; org mode
 (global-set-key "\C-cl" 'org-store-link)
