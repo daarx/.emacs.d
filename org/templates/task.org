@@ -4,8 +4,8 @@
   :END:
   %^{Description}
   %?
-** TODO Planning
-** TODO Development
-** UNPLANNED Documentation
-** UNPLANNED Testing
-** UNPLANNED Regression testing
+** TODO %\1 Planning
+** TODO %\1 Development
+** UNPLANNED %\1 Documentation
+** UNPLANNED %\1 Testing
+** UNPLANNED %\1 Regression testing

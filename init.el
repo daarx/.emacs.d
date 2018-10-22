@@ -66,3 +66,6 @@
 (global-set-key "\C-ca" 'org-agenda)
 (global-set-key "\C-cc" 'org-capture)
 (global-set-key "\C-cb" 'org-switchb)
+
+(setq org-clock-persist 'history)
+(org-clock-persistence-insinuate)
