@@ -11,7 +11,19 @@
  '(custom-enabled-themes (quote (manoj-dark)))
  '(org-capture-templates
    (quote
-    (("p" "Production support" entry
+    (("c" "Production bugs, CCM" entry
+      (id "prod-bugs-ccm")
+      (file "~/.emacs.d/org/templates/task.org")
+      :prepend t)
+     ("f" "Production bugs, common, fines" entry
+      (id "prod-bugs-fines-common")
+      (file "~/.emacs.d/org/templates/task.org")
+      :prepend t)
+     ("P" "Production bugs, program, fines" entry
+      (id "prod-bugs-fines-program")
+      (file "~/.emacs.d/org/templates/task.org")
+      :prepend t)
+     ("p" "Production support" entry
       (id "prod-support")
       (file "~/.emacs.d/org/templates/task.org")
       :prepend t)
