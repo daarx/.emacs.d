@@ -11,19 +11,23 @@
  '(custom-enabled-themes (quote (manoj-dark)))
  '(org-capture-templates
    (quote
-    (("c" "Production bugs, CCM" entry
+    (("f" "Production bugs, fines" entry
+      (id "prod-bugs-fines")
+      (file "~/.emacs.d/org/templates/task.org")
+      :prepend t)
+     ("c" "Production bugs, CCM" entry
       (id "prod-bugs-ccm")
       (file "~/.emacs.d/org/templates/task.org")
       :prepend t)
-     ("f" "Production bugs, common, fines" entry
-      (id "prod-bugs-fines-common")
+     ("p" "Production bugs, common" entry
+      (id "prod-bugs-common")
       (file "~/.emacs.d/org/templates/task.org")
       :prepend t)
-     ("P" "Production bugs, program, fines" entry
-      (id "prod-bugs-fines-program")
+     ("P" "Production bugs, program" entry
+      (id "prod-bugs-program")
       (file "~/.emacs.d/org/templates/task.org")
       :prepend t)
-     ("p" "Production support" entry
+     ("S" "Production support" entry
       (id "prod-support")
       (file "~/.emacs.d/org/templates/task.org")
       :prepend t)
@@ -81,3 +85,6 @@
 
 (setq org-clock-persist 'history)
 (org-clock-persistence-insinuate)
+
+;; Start emacs instance as server, allowing emacsclient to connect to it
+(server-start)
