@@ -77,6 +77,13 @@
            (setenv "SHELL" shell-file-name)
            (add-hook 'comint-output-filter-functions 'comint-strip-ctrl-m)))
 
+(defun revert-buffer-no-confirm ()
+  "Revert buffer without confirmation"
+  (interactive)
+  (revert-buffer t t))
+
+(global-set-key (kbd "<f5>") 'revert-buffer-no-confirm)
+
 ;; org mode
 (global-set-key "\C-cl" 'org-store-link)
 (global-set-key "\C-ca" 'org-agenda)
