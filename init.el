@@ -64,18 +64,34 @@
 (set-default-coding-systems 'utf-8)
 (set-terminal-coding-system 'utf-8)
 
-(if (equal system-type 'windows-nt)
-    (progn (setenv "PATH" 
-                   (concat "C:/msys64/usr/bin;"
-                           "C:/msys64/mingw64/bin;"
-                           "C:/msys64/usr/local/bin;"
-                           "C:/Windows/System32;"
-                           "C:/Windows"))
-           (setq shell-file-name "C:\\msys64\\usr\\bin\\zsh.exe")
-           (setq explicit-shell-file shell-file-name)
-           (setq explicit-zsh.exe-args '("--login" "-i"))
-           (setenv "SHELL" shell-file-name)
-           (add-hook 'comint-output-filter-functions 'comint-strip-ctrl-m)))
+;;;;
+;;;; cygwin support
+;;;;
+
+;; Sets your shell to use cygwin's bash, if Emacs finds it's running
+;; under Windows and c:\cygwin exists. Assumes that C:\cygwin\bin is
+;; not already in your Windows Path (it generally should not be).
+;;
+(let* ((cygwin-root "c:/cygwin64")
+       (cygwin-bin (concat cygwin-root "/bin")))
+  (when (and (eq 'windows-nt system-type)
+             (file-readable-p cygwin-root))
+
+    (setq exec-path (cons cygwin-bin exec-path))
+    (setenv "PATH" (concat cygwin-bin ";" (getenv "PATH")))
+
+    ;; By default use the Windows HOME.
+    ;; Otherwise, uncomment below to set a HOME
+    ;;      (setenv "HOME" (concat cygwin-root "/home/eric"))
+
+    ;; NT-emacs assumes a Windows shell. Change to bash.
+    (setq shell-file-name "bash")
+    (setenv "SHELL" shell-file-name) 
+    (setq explicit-shell-file-name shell-file-name) 
+
+    ;; This removes unsightly ^M characters that would otherwise
+    ;; appear in the output of java applications.
+    (add-hook 'comint-output-filter-functions 'comint-strip-ctrl-m)))
 
 (defun revert-buffer-no-confirm ()
   "Revert buffer without confirmation"
