@@ -1,47 +1,33 @@
-(package-initialize)
+(setq inhibit-startup-message t)
+
+(scroll-bar-mode -1)
+(tool-bar-mode -1)
+(tooltip-mode -1)
+(menu-bar-mode -1)
+
+(load-theme 'wombat)
 
 (require 'package)
-(add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
+
+(setq package-archives '(("melpa" . "https://melpa.org/packages/")
+                         ("org" . "https://orgmode.org/elpa/")
+                         ("elpa" . "https://elpa.gnu.org/packages/")))
+
 (package-initialize)
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(custom-enabled-themes (quote (manoj-dark)))
- '(org-capture-templates
-   (quote
-    (("f" "Production bugs, fines" entry
-      (id "prod-bugs-fines")
-      (file "~/.emacs.d/org/templates/task.org")
-      :prepend t)
-     ("c" "Production bugs, CCM" entry
-      (id "prod-bugs-ccm")
-      (file "~/.emacs.d/org/templates/task.org")
-      :prepend t)
-     ("p" "Production bugs, common" entry
-      (id "prod-bugs-common")
-      (file "~/.emacs.d/org/templates/task.org")
-      :prepend t)
-     ("P" "Production bugs, program" entry
-      (id "prod-bugs-program")
-      (file "~/.emacs.d/org/templates/task.org")
-      :prepend t)
-     ("S" "Production support" entry
-      (id "prod-support")
-      (file "~/.emacs.d/org/templates/task.org")
-      :prepend t)
-     ("s" "Story (normal development)" entry
-      (id "stories")
-      (file "~/.emacs.d/org/templates/task.org")
-      :prepend t :jump-to-captured t))))
- '(package-selected-packages (quote (org))))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
+(unless package-archive-contents (package-refresh-contents))
+
+(unless (package-installed-p 'use-package) (package-install 'use-package))
+
+(require 'use-package)
+(setq use-package-always-ensure t)
+
+(column-number-mode)
+(global-display-line-numbers-mode t)
+(dolist (mode '(org-mode-hook
+                term-mode-hook
+                eshell-mode-hook
+                shell-mode-hook))
+  (add-hook mode (lambda () (display-line-numbers-mode 0))))
 
 (setq backup-directory-alist `(("." . "~/.emacs.d/.saves")))
 (setq backup-by-copying t)
@@ -54,7 +40,6 @@
 (setq-default tab-width 4)
 (setq tab-stop-list (number-sequence 4 120 4))
 
-(setq inhibit-startup-message t)
 (setq-default buffer-file-coding-system 'utf-8-unix)
 (set-terminal-coding-system 'utf-8)
 (set-language-environment 'utf-8)
@@ -63,35 +48,6 @@
 (setq locale-coding-system 'utf-8)
 (set-default-coding-systems 'utf-8)
 (set-terminal-coding-system 'utf-8)
-
-;;;;
-;;;; cygwin support
-;;;;
-
-;; Sets your shell to use cygwin's bash, if Emacs finds it's running
-;; under Windows and c:\cygwin exists. Assumes that C:\cygwin\bin is
-;; not already in your Windows Path (it generally should not be).
-;;
-(let* ((cygwin-root "c:/cygwin64")
-       (cygwin-bin (concat cygwin-root "/bin")))
-  (when (and (eq 'windows-nt system-type)
-             (file-readable-p cygwin-root))
-
-    (setq exec-path (cons cygwin-bin exec-path))
-    (setenv "PATH" (concat cygwin-bin ";" (getenv "PATH")))
-
-    ;; By default use the Windows HOME.
-    ;; Otherwise, uncomment below to set a HOME
-    ;;      (setenv "HOME" (concat cygwin-root "/home/eric"))
-
-    ;; NT-emacs assumes a Windows shell. Change to bash.
-    (setq shell-file-name "bash")
-    (setenv "SHELL" shell-file-name) 
-    (setq explicit-shell-file-name shell-file-name) 
-
-    ;; This removes unsightly ^M characters that would otherwise
-    ;; appear in the output of java applications.
-    (add-hook 'comint-output-filter-functions 'comint-strip-ctrl-m)))
 
 (defun revert-buffer-no-confirm ()
   "Revert buffer without confirmation"
@@ -105,6 +61,10 @@
 (global-set-key "\C-ca" 'org-agenda)
 (global-set-key "\C-cc" 'org-capture)
 (global-set-key "\C-cb" 'org-switchb)
+
+(setq org-agenda-files (list "/mnt/c/Users/Henrik/Dropbox/Todo.org"))
+(setq org-log-done t)
+(setq org-todo-keywords '((sequence "TODO(t)" "IN_PROGRESS(p)" "|" "DONE(d!)" "CANCELLED(c!)")))
 
 (setq org-clock-persist 'history)
 (org-clock-persistence-insinuate)
